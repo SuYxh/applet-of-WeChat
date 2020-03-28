@@ -1,0 +1,67 @@
+<view class="main">
+
+<!-- 公共头部 -->
+<MyTitle></MyTitle>
+
+<!-- 首页导航 -->
+<view class="nav_wrap">
+<!-- 小程序自带的区域滚动组件 -->
+  <scroll-view class="nav" scroll-x>
+    <view bindtap="activeNav" data-index="{{ index }}" class="nav_item {{index===currentIndexNav?'active':''}} "  wx:for="{{ navList }}" wx:key="{{ index }}">
+      {{item.text}}
+    </view>
+  </scroll-view>
+</view>
+
+<!-- 轮播组件 -->
+<view class="slides">
+  <swiper indicator-dots="true" autoplay="true" circular="true">
+    <swiper-item wx:for="{{swiperList}}" wx:key="{{index}}">
+      <navigator>
+        <image src="{{item.imgSrc}}" mode="widthFix"></image>
+      </navigator>
+    </swiper-item>
+  </swiper>
+</view>
+<!-- indicator-dots 是否显示面板指示点
+indicator-color 指示点颜色
+indicator-active-color 当前选中的指示点颜色
+autoplay 是否自动切换
+interval  自动切换时间间隔
+duration  滑动动画时长
+circular  是否采用衔接滑动 -->
+
+
+<!-- 视屏列表 -->
+<view class="video_wrap">
+  <navigator url="/pages/detial/detial?id={{ item.id }}" class="video_item" wx:for="{{ videosList }}" wx:key="{{ index }}">
+    <!-- 图片容器 -->
+    <view class="video_img">
+      <!-- 图片 -->
+      <image mode="widthFix" src="{{item.imgSrc}}"></image>
+      <!-- 播放量 -->
+      <view class="video_info">
+        <!-- 播放量 -->
+          <view class="play_count_wrap">
+          <!-- 图标 -->
+          <text class="fa fa-play-circle-o" ></text>
+          <!-- 数值 -->
+          <text class="play_count" >{{ item.playCount }}</text>
+          
+          </view>
+        <!-- 评论量 -->
+         <view class="comment_count_row">
+          <!-- 图标 -->
+          <text class="fa fa-commenting-o" ></text>
+          <!-- 数值 -->
+          <text class="comment_count" >{{ item.commentCount }}</text>
+         
+         </view>
+      </view>
+    </view>
+    <!-- 标题 -->
+    <view class="video_title">{{ item.desc }}</view>
+  </navigator>
+</view>
+
+</view>
